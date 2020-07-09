@@ -1,0 +1,94 @@
+<div class="container">
+
+    
+<h1>Sign Up for a Trial Class!</h1>
+<!-- {{diagnostic}} -->
+<div class="form-style-5">
+<form  novalidate ng-app="DemoApp" ng-controller="DemoCtrl" >
+
+<label>Parent's name:</label>
+<input id="pname" [(ngModel)]="model.pname" name = "pname" type = "text" >
+
+<!-- TODO: remove this: {{model.pname}} -->
+
+<label>Parent's Contact Number: </label>
+<input name = "parent.contact" [(ngModel)]="model.pcontact" type = "number" minlength="10">
+
+<label>Parent's Email Id:</label>
+<input name = "parent.email" [(ngModel)]="model.pemail" type = "email" length = "100" >
+
+<label>Child's name:</label>
+<input name = "childsname" [(ngModel)]="model.cname" type = "text" >
+
+<label>Child's Age:</label>
+<input name = "age" [(ngModel)]="model.cage" type = "number" >
+
+<!-- <label>Course name:</label> -->
+<!-- <input id = "courseName" name = "courseName" [(ngModel)]="model.courseName"  ng-model-options="{ getterSetter: true }" type = "text" > -->
+
+<label for="courseName"> Course Name: </label><br>
+    <select name="courseName" [(ngModel)]="model.courseName" ng-model-options="{ getterSetter: true }">
+      <option value="Scratch Junior">Scratch Junior</option>
+      <option value="Python">Python</option>
+      <option value="Game Development">Game Development</option>
+      <option value="Web Development">Web Development</option>
+      <option value="App Development">App Development</option>
+      <option value="Artificial Intelligence">Artificial Intelligence</option>
+    </select>
+
+<label>Suitable Date for a trial class:</label> 
+<input name = "trialdate" type = "date" >
+
+
+<label>Suitable Time Slot for the trial class:</label>
+<input name = "trialtime" type = "time">
+
+
+ </form>
+</div>
+<a href="#" routerLink="" id="submit1"class="viewList" (click)="MyFunc1()" >View Slots</a>
+</div>
+
+<ul *ngFor ="let course of courses">
+  <div *ngIf = "course.course_name == x">
+<h1>Slots list</h1>
+<!-- <h1>{{ x }}</h1> -->
+<!-- <p *ngIf=">Helloooo</p> -->
+
+
+<ul class="userList" *ngIf="courses">
+    <li class="userItem" *ngFor="let course of courses" >
+        <div *ngIf="course.course_name == x">
+         
+        <p class="first">Course Id: {{ course.course_id }}</p>
+        <p class="last">Course Name: {{ course.course_name }}</p>
+        
+        <ul class="userList" *ngIf="myslots">
+            <li class="userItem" *ngFor="let x of myslots" >
+                <ng-container *ngIf="x.slot > lowerlimit && x.slot < upperlimit " >
+                <p class="first">Slot: {{ x.slot }}</p>
+                <p class="inst">Instructor Count:{{ x.instructor_count }}</p>
+                
+                
+                </ng-container>
+            </li>
+        </ul>
+        
+        
+    </div>
+    </li>
+</ul>
+</div>
+</ul>
+ <script>
+	 var mainApp = angular.module("DemoApp", []);
+         mainApp.controller('DemoCtrl', function($scope) {
+            $scope.reset = function() {
+               $scope.model.pname = "";
+              //  $scope.lastName = "Parashar";
+              //  $scope.email = "MaheshParashar@tutorialspoint.com";
+            }
+            
+            $scope.reset();
+         });
+</script>
